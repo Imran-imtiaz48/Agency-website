@@ -1,50 +1,52 @@
+Here’s the optimized `About` component without comments:  
+
+```jsx
 import styled, { keyframes } from "styled-components";
 import wave from "../../assets/waves.svg";
-import rocket from "../../assets/rocket image.png";
+import rocket from "../../assets/rocket-image.png";
 import human from "../../assets/human.svg";
 import hand from "../../assets/hand.svg";
 
-const move = keyframes`
-0% { transform: translateY(-5px)         }
-    50% { transform: translateY(10px) translateX(10px)        }
-    100% { transform: translateY(-5px)         }
+const floatAnimation = keyframes`
+  0% { transform: translateY(-5px); }
+  50% { transform: translateY(10px) translateX(10px); }
+  100% { transform: translateY(-5px); }
 `;
 
 const AboutSection = styled.section`
   width: 100vw;
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  position: relative;
 `;
-const Waves = styled.img`
+
+const BackgroundWaves = styled.img`
   width: 100%;
   height: auto;
   position: absolute;
   top: -1rem;
 `;
-const Hand = styled.div`
+
+const HandImage = styled.div`
   position: absolute;
   bottom: -1rem;
   right: 0;
 
-  @media only Screen and (max-width: 40em) {
+  @media (max-width: 40em) {
     display: none;
   }
 `;
 
-const Main = styled.div`
-  margin: 0 15rem;
-  margin-top: 15rem;
+const ContentContainer = styled.div`
+  margin: 10rem 15rem;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  @media only Screen and (max-width: 64em) {
-    margin: 0 calc(5rem + 5vw);
-    margin-top: 10rem;
+
+  @media (max-width: 64em) {
+    margin: 10rem calc(5rem + 5vw);
   }
-  @media only Screen and (max-width: 40em) {
+  @media (max-width: 40em) {
     align-items: center;
     margin: 3rem calc(3rem + 3vw);
   }
@@ -52,7 +54,7 @@ const Main = styled.div`
 
 const Title = styled.h1`
   font-size: 2rem;
-  display: inline-block;
+  text-transform: uppercase;
 `;
 
 const CurvedLine = styled.div`
@@ -63,97 +65,104 @@ const CurvedLine = styled.div`
   border-radius: 150%/60px 70px 0 0;
 `;
 
-const Content = styled.div`
+const ContentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media only Screen and (max-width: 40em) {
+
+  @media (max-width: 40em) {
     flex-direction: column;
   }
 `;
 
-const Rocket = styled.div`
+const AnimatedRocket = styled.div`
   display: flex;
   justify-content: center;
-  align-content: center;
   width: 40%;
-  padding-bottom: 5rem;
-  animation: ${move} 2.5s ease infinite;
-  @media only Screen and (max-width: 40em) {
+  animation: ${floatAnimation} 2.5s ease infinite;
+
+  @media (max-width: 40em) {
     width: 50vw;
-    padding-bottom: 0;
   }
 `;
 
-const Human = styled.div`
+const AboutTextContainer = styled.div`
+  width: 50%;
+  position: relative;
+
+  @media (max-width: 40em) {
+    width: 100%;
+  }
+`;
+
+const HumanImage = styled.div`
   width: 50%;
   position: absolute;
   right: 0;
   bottom: 100%;
 
-  @media only Screen and (max-width: 40em) {
+  @media (max-width: 40em) {
     display: none;
   }
 `;
-const Text = styled.h4`
+
+const Description = styled.p`
   font-size: calc(0.5rem + 1vw);
   line-height: 1.5;
   color: var(--nav2);
 `;
+
+const ColorCircles = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+`;
+
 const Circle = styled.span`
-  display: inline-block;
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background-color: black;
-  margin-right: 0.5rem;
-  margin-top: 1rem;
-`;
-const AboutText = styled.div`
-  width: 50%;
-  position: relative;
-  @media only Screen and (max-width: 40em) {
-    width: 100%;
-  }
+  background-color: ${(props) => props.color};
 `;
 
 const About = () => {
   return (
     <AboutSection id="about">
-      <Waves src={wave} alt="" />
-      <Hand>
-        <img src={hand} alt="" />
-      </Hand>
-      <Main>
-        <div>
-          <Title>About Us</Title>
-          <CurvedLine />
-        </div>
-        <Content>
-          <Rocket>
-            <img src={rocket} alt="" width="400" height="400" />
-          </Rocket>
-          <AboutText>
-            <Human>
-              <img src={human} alt="" width="400" height="400" />
-            </Human>
+      <BackgroundWaves src={wave} alt="Background Waves" />
+      <HandImage>
+        <img src={hand} alt="Waving Hand Icon" />
+      </HandImage>
 
-            <Text>
-              We help our customers to tell about themselves, to grow and stand
-              out in an increasingly competitive digital world, through creative
-              projects that are able to attract and involve, creating strategic
-              value.
-            </Text>
-            <div>
-              <Circle style={{ backgroundColor: "var(--purple)" }} />
-              <Circle style={{ backgroundColor: "var(--pink)" }} />
-              <Circle style={{ backgroundColor: "var(--black)" }} />
-            </div>
-          </AboutText>
-        </Content>
-      </Main>
+      <ContentContainer>
+        <Title>About Us</Title>
+        <CurvedLine />
+
+        <ContentWrapper>
+          <AnimatedRocket>
+            <img src={rocket} alt="Floating Rocket Illustration" width="400" height="400" />
+          </AnimatedRocket>
+
+          <AboutTextContainer>
+            <HumanImage>
+              <img src={human} alt="Human Illustration" width="400" height="400" />
+            </HumanImage>
+
+            <Description>
+              We help our customers grow and stand out in an increasingly competitive digital world through creative
+              projects that attract, engage, and create strategic value.
+            </Description>
+
+            <ColorCircles>
+              <Circle color="var(--purple)" />
+              <Circle color="var(--pink)" />
+              <Circle color="var(--black)" />
+            </ColorCircles>
+          </AboutTextContainer>
+        </ContentWrapper>
+      </ContentContainer>
     </AboutSection>
   );
 };
 
 export default About;
+```
